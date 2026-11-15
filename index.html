@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCalc - الأدوات الذكية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>SmartCalc</h1>
+        <p>منصتك الذكية لأسرع الحسابات اليومية</p>
+    </header>
+
+    <main>
+        <h2>مرحباً بك في SmartCalc!</h2>
+        <p>اكتشف مجموعة من الأدوات المجانية التي تساعدك في حياتك اليومية.</p>
+        <h2>أدواتنا المجانية</h2>
+
+        <!-- شبكة الأدوات -->
+        <div class="tools-grid">
+            
+            <!-- 1. حاسبة النسبة المئوية -->
+            <section>
+                <h3>حاسبة النسبة المئوية</h3>
+                <input type="number" id="num" placeholder="أدخل الرقم (مثلاً 200)">
+                <input type="number" id="percent" placeholder="أدخل النسبة % (مثلاً 15)">
+                <div class="btn-group">
+                    <button onclick="calculatePercentage()">احسب النتيجة</button>
+                    <button class="reset-btn" onclick="resetFields('num', 'percent', 'percentResult', 'النتيجة ستظهر هنا')">مسح</button>
+                </div>
+                <p id="percentResult">النتيجة ستظهر هنا</p>
+            </section>
+
+            <!-- 2. حاسبة التخفيضات -->
+            <section>
+                <h3>حاسبة التخفيضات</h3>
+                <input type="number" id="price" placeholder="السعر الأصلي">
+                <input type="number" id="discount" placeholder="نسبة التخفيض %">
+                <div class="btn-group">
+                    <button onclick="calculateDiscount()">احسب السعر</button>
+                    <button class="reset-btn" onclick="resetFields('price', 'discount', 'discountResult', 'السعر بعد التخفيض سيظهر هنا')">مسح</button>
+                </div>
+                <p id="discountResult">السعر بعد التخفيض سيظهر هنا</p>
+            </section>
+
+            <!-- 3. حاسبة العمر -->
+            <section>
+                <h3>حاسبة العمر</h3>
+                <input type="number" id="birthYear" placeholder="أدخل سنة الميلاد (مثلاً 2008)">
+                <div class="btn-group">
+                    <button onclick="calculateAge()">احسب عمرك</button>
+                    <button class="reset-btn" onclick="resetFields('birthYear', null, 'ageResult', 'عمرك سيظهر هنا')">مسح</button>
+                </div>
+                <p id="ageResult">عمرك سيظهر هنا</p>
+            </section>
+
+            <!-- 4. حاسبة مؤشر كتلة الجسم BMI -->
+            <section>
+                <h3>حاسبة كتلة الجسم (BMI)</h3>
+                <input type="number" id="weight" placeholder="الوزن بالكيلوغرام (مثلاً 65)">
+                <input type="number" id="height" placeholder="الطول بالسنتيمتر (مثلاً 175)">
+                <div class="btn-group">
+                    <button onclick="calculateBMI()">احسب المؤشر</button>
+                    <button class="reset-btn" onclick="resetFields('weight', 'height', 'bmiResult', 'مؤشر كتلة الجسم سيظهر هنا')">مسح</button>
+                </div>
+                <p id="bmiResult">مؤشر كتلة الجسم سيظهر هنا</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 SmartCalc - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        // 1. دالة حاسبة النسبة المئوية
+        function calculatePercentage() {
+            let num = document.getElementById("num").value;
+            let percent = document.getElementById("percent").value;
+            let result = document.getElementById("percentResult");
+
+            if (num === "" || percent === "") {
+                result.textContent = "يرجى إدخال جميع الخانات";
+                return;
+            }
+
+            let answer = (Number(num) * Number(percent)) / 100;
+            result.textContent = "النتيجة هي: " + answer;
+        }
+
+        // 2. دالة حاسبة التخفيضات
+        function calculateDiscount() {
+            let price = document.getElementById("price").value;
+            let discount = document.getElementById("discount").value;
+            let result = document.getElementById("discountResult");
+
+            if (price === "" || discount === "") {
+                result.textContent = "يرجى إدخال السعر والتخفيض";
+                return;
+            }
+
+            let saving = (Number(price) * Number(discount)) / 100;
+            let finalPrice = Number(price) - saving;
+            result.textContent = "السعر بعد التخفيض: " + finalPrice;
+        }
+
+        // 3. دالة حاسبة العمر
+        function calculateAge() {
+            let birthYear = document.getElementById("birthYear").value;
+            let result = document.getElementById("ageResult");
+
+            if (birthYear === "") {
+                result.textContent = "يرجى إدخال سنة الميلاد";
+                return;
+            }
+
+            let currentYear = 2026;
+            let age = currentYear - Number(birthYear);
+            result.textContent = "عمرك هو: " + age + " سنة";
+        }
+
+        // 4. دالة حاسبة مؤشر كتلة الجسم BMI
+        function calculateBMI() {
+            let weight = document.getElementById("weight").value;
+            let height = document.getElementById("height").value;
+            let result = document.getElementById("bmiResult");
+
+            if (weight === "" || height === "") {
+                result.textContent = "يرجى إدخال الوزن والطول";
+                return;
+            }
+
+            let heightInMeters = Number(height) / 100;
+            let bmi = (Number(weight) / (heightInMeters * heightInMeters)).toFixed(1);
+            let status = "";
+
+            if (bmi < 18.5) {
+                status = "نقص في الوزن (نحافة)";
+            } else if (bmi >= 18.5 && bmi < 25) {
+                status = "وزن مثالي وصحي";
+            } else if (bmi >= 25 && bmi < 30) {
+                status = "زيادة في الوزن";
+            } else {
+                status = "سمنة";
+            }
+
+            result.textContent = "مؤشرك: " + bmi + " (" + status + ")";
+        }
+
+        // دالة المسح العامة لكل الحواسب
+        function resetFields(input1Id, input2Id, resultId, defaultText) {
+            if (input1Id) document.getElementById(input1Id).value = "";
+            if (input2Id) document.getElementById(input2Id).value = "";
+            document.getElementById(resultId).textContent = defaultText;
+        }
+    </script>
+</body>
+</html>
