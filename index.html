@@ -3,158 +3,776 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCalc - الأدوات الذكية</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- تحسين محركات البحث SEO بالاسم الجديد -->
+    <title>حساب المعدل الثانوي - المعدلات المدرسية، البيام، والبكالوريا في الجزائر</title>
+    <meta name="description" content="موقع حساب المعدل الثانوي هو أفضل أداة مجانية لحساب المعدل الفصلي لجميع الشعب، حساب معدل شهادة التعليم المتوسط BEM، ومعدل البكالوريا في الجزائر بطريقة فورية ودقيقة.">
+    <meta name="keywords" content="حساب المعدل الثانوي, حساب معدل الباك, معدل البيام, حساب المعدل الفصلي الجزائر, معدلي, معاملات المواد في الجزائر">
+    <meta name="author" content="AbdennourX">
+
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 27, 34, 0.9);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 100%; height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .hero h1 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+
+        .section-box {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .card-item {
+            background: rgba(13, 17, 23, 0.75);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-item:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-3px);
+            background: rgba(22, 27, 34, 0.95);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-info h3 {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .card-info span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .icon-badge {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .badge-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+        .badge-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-rose { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13.5px;
+        }
+
+        th:first-child, td:first-child {
+            text-align: right;
+        }
+
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        input[type="number"] {
+            width: 80px;
+            background: #0b0f19;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 14px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #34d399;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>SmartCalc</h1>
-        <p>منصتك الذكية لأسرع الحسابات اليومية</p>
-    </header>
-
-    <main>
-        <h2>مرحباً بك في SmartCalc!</h2>
-        <p>اكتشف مجموعة من الأدوات المجانية التي تساعدك في حياتك اليومية.</p>
-        <h2>أدواتنا المجانية</h2>
-
-        <!-- شبكة الأدوات -->
-        <div class="tools-grid">
-            
-            <!-- 1. حاسبة النسبة المئوية -->
-            <section>
-                <h3>حاسبة النسبة المئوية</h3>
-                <input type="number" id="num" placeholder="أدخل الرقم (مثلاً 200)">
-                <input type="number" id="percent" placeholder="أدخل النسبة % (مثلاً 15)">
-                <div class="btn-group">
-                    <button onclick="calculatePercentage()">احسب النتيجة</button>
-                    <button class="reset-btn" onclick="resetFields('num', 'percent', 'percentResult', 'النتيجة ستظهر هنا')">مسح</button>
-                </div>
-                <p id="percentResult">النتيجة ستظهر هنا</p>
-            </section>
-
-            <!-- 2. حاسبة التخفيضات -->
-            <section>
-                <h3>حاسبة التخفيضات</h3>
-                <input type="number" id="price" placeholder="السعر الأصلي">
-                <input type="number" id="discount" placeholder="نسبة التخفيض %">
-                <div class="btn-group">
-                    <button onclick="calculateDiscount()">احسب السعر</button>
-                    <button class="reset-btn" onclick="resetFields('price', 'discount', 'discountResult', 'السعر بعد التخفيض سيظهر هنا')">مسح</button>
-                </div>
-                <p id="discountResult">السعر بعد التخفيض سيظهر هنا</p>
-            </section>
-
-            <!-- 3. حاسبة العمر -->
-            <section>
-                <h3>حاسبة العمر</h3>
-                <input type="number" id="birthYear" placeholder="أدخل سنة الميلاد (مثلاً 2008)">
-                <div class="btn-group">
-                    <button onclick="calculateAge()">احسب عمرك</button>
-                    <button class="reset-btn" onclick="resetFields('birthYear', null, 'ageResult', 'عمرك سيظهر هنا')">مسح</button>
-                </div>
-                <p id="ageResult">عمرك سيظهر هنا</p>
-            </section>
-
-            <!-- 4. حاسبة مؤشر كتلة الجسم BMI -->
-            <section>
-                <h3>حاسبة كتلة الجسم (BMI)</h3>
-                <input type="number" id="weight" placeholder="الوزن بالكيلوغرام (مثلاً 65)">
-                <input type="number" id="height" placeholder="الطول بالسنتيمتر (مثلاً 175)">
-                <div class="btn-group">
-                    <button onclick="calculateBMI()">احسب المؤشر</button>
-                    <button class="reset-btn" onclick="resetFields('weight', 'height', 'bmiResult', 'مؤشر كتلة الجسم سيظهر هنا')">مسح</button>
-                </div>
-                <p id="bmiResult">مؤشر كتلة الجسم سيظهر هنا</p>
-            </section>
-
+    <div class="container">
+        <div class="hero">
+            <h1>حساب المعدل الثانوي - المعدلات المدرسية والوطنية في الجزائر</h1>
+            <p>أداة ذكية لحساب معدلات الثانوي الفصلي لجميع الشعب، شهادة التعليم المتوسط (BEM)، وشهادة البكالوريا (BAC) فورياً.</p>
         </div>
-    </main>
 
-    <footer>
-        <p>© 2026 SmartCalc - جميع الحقوق محفوظة</p>
-    </footer>
+        <!-- الرئيسية -->
+        <div id="view-years" class="view-section active">
+            <!-- قسم التعليم الثانوي -->
+            <div class="section-box">
+                <div class="section-title"><span>🎓 التعليم الثانوي (فصول ومعدلات)</span></div>
+                <div class="section-desc">حساب المعدلات الفصلية لكل السنوات والشعب الدراسية في الجزائر</div>
+                
+                <div class="grid-cards">
+                    <div class="card-item" onclick="showView('view-1as-branches')">
+                        <div class="card-info">
+                            <h3>السنة الأولى ثانوي</h3>
+                            <span>جذوع مشترك علوم أو آداب</span>
+                        </div>
+                        <div class="icon-badge badge-blue">1</div>
+                    </div>
+                    <div class="card-item" onclick="showView('view-2as-branches')">
+                        <div class="card-info">
+                            <h3>السنة الثانية ثانوي</h3>
+                            <span>علوم، رياضيات، تقني، تسيير...</span>
+                        </div>
+                        <div class="icon-badge badge-purple">2</div>
+                    </div>
+                    <div class="card-item" onclick="showView('view-3as-branches')">
+                        <div class="card-info">
+                            <h3>السنة الثالثة ثانوي (الفصلي)</h3>
+                            <span>جميع الشعب النهائية</span>
+                        </div>
+                        <div class="icon-badge badge-amber">3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم الشهادات الوطنية (BEM & BAC) -->
+            <div class="section-box">
+                <div class="section-title"><span>🏆 شهادات التعليم المتوسط والباك</span></div>
+                <div class="section-desc">احسب معدل نجاحك في شهادة BEM أو معدل البكالوريا رسمياً وحسب المعاملات</div>
+                
+                <div class="grid-cards">
+                    <div class="card-item" onclick="openNationalCalc('bem', 'حساب معدل شهادة التعليم المتوسط (BEM)')">
+                        <div class="card-info">
+                            <h3>حساب معدل البيام (BEM)</h3>
+                            <span>حسب المعاملات الرسمية لـ 4 متوسط</span>
+                        </div>
+                        <div class="icon-badge badge-green">🎖️</div>
+                    </div>
+                    <div class="card-item" onclick="openNationalCalc('bac', 'حساب معدل شهادة البكالوريا (BAC)')">
+                        <div class="card-info">
+                            <h3>حساب معدل البكالوريا (BAC)</h3>
+                            <span>الامتحان النهائي الرسمي</span>
+                        </div>
+                        <div class="icon-badge badge-amber">⭐</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- فروع السنة الأولى ثانوي -->
+        <div id="view-1as-branches" class="view-section">
+            <button class="back-btn" onclick="showView('view-years')">← العودة للرئيسية</button>
+            <div class="section-box">
+                <div class="section-title"><span>📚 اختر الجذع المشترك - الأولى ثانوي</span></div>
+                <div class="grid-cards">
+                    <div class="card-item" onclick="openCalculator('1as_sc', 'جذع مشترك علوم وتكنولوجيا')">
+                        <div class="card-info">
+                            <h3>جذع مشترك علوم وتكنولوجيا</h3>
+                            <span>معاملات العلوم والتكنولوجيا</span>
+                        </div>
+                        <div class="icon-badge badge-green">💻</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('1as_lit', 'جذع مشترك أداب')">
+                        <div class="card-info">
+                            <h3>جذع مشترك أداب</h3>
+                            <span>المعاملات الأدبية</span>
+                        </div>
+                        <div class="icon-badge badge-rose">📖</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- فروع السنة الثانية ثانوي -->
+        <div id="view-2as-branches" class="view-section">
+            <button class="back-btn" onclick="showView('view-years')">← العودة للرئيسية</button>
+            <div class="section-box">
+                <div class="section-title"><span>📊 اختر الشعبة - الثانية ثانوي</span></div>
+                <div class="grid-cards">
+                    <div class="card-item" onclick="openCalculator('2as_math_sci', 'شعبة علوم تجريبية / رياضيات')">
+                        <div class="card-info">
+                            <h3>شعبة علوم تجريبية / رياضيات</h3>
+                            <span>علوم وفيزياء ورياضيات</span>
+                        </div>
+                        <div class="icon-badge badge-blue">🔬</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('2as_gestion', 'شعبة تسيير واقتصاد')">
+                        <div class="card-info">
+                            <h3>شعبة تسيير واقتصاد</h3>
+                            <span>محاسبة واقتصاد مالي</span>
+                        </div>
+                        <div class="icon-badge badge-amber">📈</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('2as_tech', 'شعبة تقني رياضي')">
+                        <div class="card-info">
+                            <h3>شعبة تقني رياضي</h3>
+                            <span>تكنولوجيا هندسة ورياضة</span>
+                        </div>
+                        <div class="icon-badge badge-purple">⚙️</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('2as_lang', 'شعبة لغات أجنبية')">
+                        <div class="card-info">
+                            <h3>شعبة لغات أجنبية</h3>
+                            <span>لغات حية متعددة</span>
+                        </div>
+                        <div class="icon-badge badge-cyan">🌍</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('2as_philo', 'شعبة آداب وفلسفة')">
+                        <div class="card-info">
+                            <h3>شعبة آداب وفلسفة</h3>
+                            <span>فلسفة وتاريخ وأدب</span>
+                        </div>
+                        <div class="icon-badge badge-rose">📜</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- فروع السنة الثالثة ثانوي -->
+        <div id="view-3as-branches" class="view-section">
+            <button class="back-btn" onclick="showView('view-years')">← العودة للرئيسية</button>
+            <div class="section-box">
+                <div class="section-title"><span>🏆 اختر الشعبة - الثالثة ثانوي</span></div>
+                <div class="grid-cards">
+                    <div class="card-item" onclick="openCalculator('3as_gestion', 'شعبة تسيير واقتصاد')">
+                        <div class="card-info">
+                            <h3>تسيير واقتصاد</h3>
+                            <span>المحاسبة 6، رياضيات والاقتصاد 5</span>
+                        </div>
+                        <div class="icon-badge badge-amber">💼</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('3as_sci', 'علوم تجريبية')">
+                        <div class="card-info">
+                            <h3>علوم تجريبية</h3>
+                            <span>رياضيات، علوم، فيزياء</span>
+                        </div>
+                        <div class="icon-badge badge-green">🧬</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('3as_math', 'رياضيات وتقني رياضي')">
+                        <div class="card-info">
+                            <h3>رياضيات / تقني رياضي</h3>
+                            <span>معامل رياضيات مرتفع</span>
+                        </div>
+                        <div class="icon-badge badge-blue">📐</div>
+                    </div>
+                    <div class="card-item" onclick="openCalculator('3as_philo', 'آداب وفلسفة ولغات')">
+                        <div class="card-info">
+                            <h3>آداب وفلسفة / لغات أجنبية</h3>
+                            <span>معامل فلسفة ولغات</span>
+                        </div>
+                        <div class="icon-badge badge-rose">📚</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة الحاسبة الفصلية (ثانوي) -->
+        <div id="calc-view" class="view-section">
+            <button class="back-btn" onclick="goBackToMain()">← العودة لاختيار الشعبة</button>
+            <h2 id="calc-title" style="margin-bottom: 20px; color: #fff; font-size: 20px; font-weight: 600;">حساب المعدل</h2>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المادة</th>
+                            <th>الفرض</th>
+                            <th>التقويم</th>
+                            <th>أعمال تطبيقية</th>
+                            <th>الاختبار</th>
+                            <th>معدل المادة</th>
+                            <th>المعامل</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjects-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="result-display" class="result-box">
+                المعدل الفصلي العام هو: <span id="final-avg">0.00</span> / 20
+            </div>
+        </div>
+
+        <!-- نافذة حاسبة البيام والباك الوطنية -->
+        <div id="national-calc-view" class="view-section">
+            <button class="back-btn" onclick="showView('view-years')">← العودة للرئيسية</button>
+            <h2 id="national-calc-title" style="margin-bottom: 20px; color: #fff; font-size: 20px; font-weight: 600;">حساب المعدل الوطني</h2>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr id="nat-table-header">
+                        </tr>
+                    </thead>
+                    <tbody id="national-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="national-result-display" class="result-box">
+                معدل شهادة النجاح هو: <span id="national-final-avg">0.00</span> / 20
+            </div>
+        </div>
+
+        <footer>
+            حساب المعدل الثانوي © 2026 | جميع الحقوق محفوظة
+        </footer>
+    </div>
 
     <script>
-        // 1. دالة حاسبة النسبة المئوية
-        function calculatePercentage() {
-            let num = document.getElementById("num").value;
-            let percent = document.getElementById("percent").value;
-            let result = document.getElementById("percentResult");
+        const subjectsData = {
+            'bem': [
+                { name: 'اللغة العربية', coef: 5 },
+                { name: 'الرياضيات', coef: 4 },
+                { name: 'اللغة الفرنسية', coef: 3 },
+                { name: 'اللغة الإنجليزية', coef: 2 },
+                { name: 'علوم الطبيعة والحياة', coef: 2 },
+                { name: 'العلوم الفيزيائية والتكنولوجية', coef: 2 },
+                { name: 'التاريخ والجغرافيا', coef: 2 },
+                { name: 'التربية الإسلامية', coef: 2 },
+                { name: 'التربية المدنية', coef: 1 },
+                { name: 'التربية التشكلية / الموسيقية', coef: 1 },
+                { name: 'التربية البدنية والرياضية', coef: 1 }
+            ],
+            'bac': [
+                { name: 'التسيير المحاسبي / العلوم / الرياضيات', coef: 6 },
+                { name: 'العلوم الفيزيائية / الاقتصاد', coef: 5 },
+                { name: 'الرياضيات / الفلسفة', coef: 5 },
+                { name: 'التاريخ والجغرافيا', coef: 4 },
+                { name: 'اللغة العربية وآدابها', coef: 3 },
+                { name: 'اللغة الفرنسية', coef: 2 },
+                { name: 'اللغة الإنجليزية', coef: 2 },
+                { name: 'العلوم الإسلامية', coef: 2 },
+                { name: 'الفلسفة / القانون', coef: 2 },
+                { name: 'التربية البدنية', coef: 1 }
+            ],
+            '3as_gestion': [
+                { name: 'التسيير المحاسبي والمالي', coef: 6, hasTP: false },
+                { name: 'الرياضيات', coef: 5, hasTP: false },
+                { name: 'الاقتصاد والمناجمنت', coef: 5, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 4, hasTP: false },
+                { name: 'اللغة العربية وآدابها', coef: 3, hasTP: false },
+                { name: 'القانون', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'الفلسفة', coef: 2, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 2, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '2as_gestion': [
+                { name: 'التسيير المحاسبي والمالي', coef: 6, hasTP: false },
+                { name: 'الرياضيات', coef: 4, hasTP: false },
+                { name: 'الاقتصاد والمناجمنت', coef: 4, hasTP: false },
+                { name: 'اللغة العربية وآدابها', coef: 3, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 3, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '1as_sc': [
+                { name: 'رياضيات', coef: 5, hasTP: false },
+                { name: 'علوم الطبيعة والحياة', coef: 4, hasTP: true },
+                { name: 'العلوم الفيزيائية', coef: 4, hasTP: true },
+                { name: 'اللغة العربية وآدابها', coef: 4, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 3, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية الفنية', coef: 1, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '1as_lit': [
+                { name: 'اللغة العربية وآدابها', coef: 5, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 3, hasTP: false },
+                { name: 'رياضيات', coef: 3, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 3, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'علوم الطبيعة والحياة', coef: 2, hasTP: true },
+                { name: 'التربية الفنية', coef: 1, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '2as_math_sci': [
+                { name: 'علوم الطبيعة والحياة', coef: 5, hasTP: true },
+                { name: 'رياضيات', coef: 5, hasTP: false },
+                { name: 'العلوم الفيزيائية', coef: 4, hasTP: true },
+                { name: 'اللغة العربية وآدابها', coef: 3, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 2, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '2as_tech': [
+                { name: 'التكنولوجيا (هندسة)', coef: 6, hasTP: true },
+                { name: 'رياضيات', coef: 5, hasTP: false },
+                { name: 'العلوم الفيزيائية', coef: 5, hasTP: true },
+                { name: 'اللغة العربية وآدابها', coef: 3, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 2, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '2as_lang': [
+                { name: 'اللغة الإنجليزية', coef: 5, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 5, hasTP: false },
+                { name: 'اللغة العربية وآدابها', coef: 4, hasTP: false },
+                { name: 'لغة أجنبية ثالثة', coef: 4, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 3, hasTP: false },
+                { name: 'الرياضيات', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '2as_philo': [
+                { name: 'الفلسفة', coef: 5, hasTP: false },
+                { name: 'اللغة العربية وآدابها', coef: 5, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 4, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 3, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'الرياضيات', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '3as_sci': [
+                { name: 'علوم الطبيعة والحياة', coef: 6, hasTP: true },
+                { name: 'العلوم الفيزيائية', coef: 5, hasTP: true },
+                { name: 'رياضيات', coef: 5, hasTP: false },
+                { name: 'اللغة العربية وآدابها', coef: 3, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 2, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'الفلسفة', coef: 2, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '3as_math': [
+                { name: 'رياضيات', coef: 7, hasTP: false },
+                { name: 'العلوم الفيزيائية', coef: 6, hasTP: true },
+                { name: 'علوم الطبيعة والحياة', coef: 4, hasTP: true },
+                { name: 'اللغة العربية وآدابها', coef: 3, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 2, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 2, hasTP: false },
+                { name: 'الفلسفة', coef: 2, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ],
+            '3as_philo': [
+                { name: 'الفلسفة', coef: 6, hasTP: false },
+                { name: 'اللغة العربية وآدابها', coef: 6, hasTP: false },
+                { name: 'التاريخ والجغرافيا', coef: 4, hasTP: false },
+                { name: 'اللغة الفرنسية', coef: 3, hasTP: false },
+                { name: 'اللغة الإنجليزية', coef: 3, hasTP: false },
+                { name: 'رياضيات', coef: 2, hasTP: false },
+                { name: 'العلوم الإسلامية', coef: 2, hasTP: false },
+                { name: 'التربية البدنية', coef: 1, hasTP: false }
+            ]
+        };
 
-            if (num === "" || percent === "") {
-                result.textContent = "يرجى إدخال جميع الخانات";
-                return;
-            }
+        let activeBranchKey = '';
+        let lastParentView = 'view-years';
 
-            let answer = (Number(num) * Number(percent)) / 100;
-            result.textContent = "النتيجة هي: " + answer;
+        function showView(viewId) {
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            if(viewId.includes('1as')) lastParentView = 'view-1as-branches';
+            else if(viewId.includes('2as')) lastParentView = 'view-2as-branches';
+            else if(viewId.includes('3as')) lastParentView = 'view-3as-branches';
+            else lastParentView = 'view-years';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 2. دالة حاسبة التخفيضات
-        function calculateDiscount() {
-            let price = document.getElementById("price").value;
-            let discount = document.getElementById("discount").value;
-            let result = document.getElementById("discountResult");
+        function openCalculator(branchKey, branchTitle) {
+            activeBranchKey = branchKey;
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.getElementById('calc-view').classList.add('active');
+            document.getElementById('calc-title').innerText = 'حساب المعدل الفصلي - ' + branchTitle;
 
-            if (price === "" || discount === "") {
-                result.textContent = "يرجى إدخال السعر والتخفيض";
-                return;
-            }
+            const tbody = document.getElementById('subjects-table-body');
+            tbody.innerHTML = '';
 
-            let saving = (Number(price) * Number(discount)) / 100;
-            let finalPrice = Number(price) - saving;
-            result.textContent = "السعر بعد التخفيض: " + finalPrice;
+            const subs = subjectsData[branchKey] || subjectsData['3as_gestion'];
+            subs.forEach((sub, index) => {
+                let tpInputHTML = sub.hasTP 
+                    ? `<input type="number" step="0.01" min="0" max="20" class="tp-input" placeholder="00.00" oninput="calculateAverage()">` 
+                    : `<span style="color: var(--text-muted);">-</span>`;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight: 600;">${sub.name}</td>
+                        <td><input type="number" step="0.01" min="0" max="20" class="farid-input" placeholder="00.00" oninput="calculateAverage()"></td>
+                        <td><input type="number" step="0.01" min="0" max="20" class="taqwim-input" placeholder="00.00" oninput="calculateAverage()"></td>
+                        <td>${tpInputHTML}</td>
+                        <td><input type="number" step="0.01" min="0" max="20" class="iktibar-input" placeholder="00.00" oninput="calculateAverage()"></td>
+                        <td id="res-${index}" style="font-weight: bold; color: #34d399;">-</td>
+                        <td><span style="color: #60a5fa; font-weight: bold;">${sub.coef}</span></td>
+                    </tr>
+                `;
+            });
+            calculateAverage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 3. دالة حاسبة العمر
-        function calculateAge() {
-            let birthYear = document.getElementById("birthYear").value;
-            let result = document.getElementById("ageResult");
+        function openNationalCalc(type, title) {
+            activeBranchKey = type;
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.getElementById('national-calc-view').classList.add('active');
+            document.getElementById('national-calc-title').innerText = title;
 
-            if (birthYear === "") {
-                result.textContent = "يرجى إدخال سنة الميلاد";
-                return;
-            }
+            const theader = document.getElementById('nat-table-header');
+            const tbody = document.getElementById('national-table-body');
+            tbody.innerHTML = '';
 
-            let currentYear = 2026;
-            let age = currentYear - Number(birthYear);
-            result.textContent = "عمرك هو: " + age + " سنة";
-        }
-
-        // 4. دالة حاسبة مؤشر كتلة الجسم BMI
-        function calculateBMI() {
-            let weight = document.getElementById("weight").value;
-            let height = document.getElementById("height").value;
-            let result = document.getElementById("bmiResult");
-
-            if (weight === "" || height === "") {
-                result.textContent = "يرجى إدخال الوزن والطول";
-                return;
-            }
-
-            let heightInMeters = Number(height) / 100;
-            let bmi = (Number(weight) / (heightInMeters * heightInMeters)).toFixed(1);
-            let status = "";
-
-            if (bmi < 18.5) {
-                status = "نقص في الوزن (نحافة)";
-            } else if (bmi >= 18.5 && bmi < 25) {
-                status = "وزن مثالي وصحي";
-            } else if (bmi >= 25 && bmi < 30) {
-                status = "زيادة في الوزن";
+            if(type === 'bem') {
+                theader.innerHTML = `<th>المادة</th><th>علامة امتحان البيام</th><th>المعامل</th>`;
             } else {
-                status = "سمنة";
+                theader.innerHTML = `<th>المادة</th><th>علامة امتحان البكالوريا</th><th>المعامل</th>`;
             }
 
-            result.textContent = "مؤشرك: " + bmi + " (" + status + ")";
+            const subs = subjectsData[type];
+            subs.forEach((sub, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight: 600;">${sub.name}</td>
+                        <td><input type="number" step="0.01" min="0" max="20" class="nat-input" placeholder="00.00" oninput="calculateNationalAverage()"></td>
+                        <td><span style="color: #60a5fa; font-weight: bold;">${sub.coef}</span></td>
+                    </tr>
+                `;
+            });
+            calculateNationalAverage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // دالة المسح العامة لكل الحواسب
-        function resetFields(input1Id, input2Id, resultId, defaultText) {
-            if (input1Id) document.getElementById(input1Id).value = "";
-            if (input2Id) document.getElementById(input2Id).value = "";
-            document.getElementById(resultId).textContent = defaultText;
+        function goBackToMain() {
+            showView(lastParentView);
+        }
+
+        function calculateAverage() {
+            const rows = document.querySelectorAll('#subjects-table-body tr');
+            let totalPoints = 0;
+            let totalCoeffs = 0;
+            const subs = subjectsData[activeBranchKey];
+
+            rows.forEach((row, index) => {
+                const faridInput = row.querySelector('.farid-input').value;
+                const taqwimInput = row.querySelector('.taqwim-input').value;
+                const iktibarInput = row.querySelector('.iktibar-input').value;
+                const tpField = row.querySelector('.tp-input');
+                const resCell = row.querySelector(`#res-${index}`);
+
+                let farid = faridInput === '' ? 0 : parseFloat(faridInput);
+                let taqwim = taqwimInput === '' ? 0 : parseFloat(taqwimInput);
+                let iktibar = iktibarInput === '' ? 0 : parseFloat(iktibarInput);
+
+                let subAvg = 0;
+                if (tpField) {
+                    let tp = tpField.value === '' ? 0 : parseFloat(tpField.value);
+                    subAvg = (farid + taqwim + tp + (iktibar * 3)) / 6;
+                } else {
+                    subAvg = (farid + taqwim + (iktibar * 2)) / 4;
+                }
+
+                if(faridInput !== '' || taqwimInput !== '' || iktibarInput !== '' || (tpField && tpField.value !== '')) {
+                    resCell.innerText = subAvg.toFixed(2);
+                } else {
+                    resCell.innerText = '-';
+                }
+
+                let coef = subs[index].coef;
+                totalPoints += (subAvg * coef);
+                totalCoeffs += coef;
+            });
+
+            if (totalCoeffs > 0) {
+                let finalAverage = totalPoints / totalCoeffs;
+                document.getElementById('final-avg').innerText = finalAverage.toFixed(2);
+                document.getElementById('result-display').style.display = 'block';
+            }
+        }
+
+        function calculateNationalAverage() {
+            const rows = document.querySelectorAll('#national-table-body tr');
+            let totalPoints = 0;
+            let totalCoeffs = 0;
+            const subs = subjectsData[activeBranchKey];
+
+            rows.forEach((row, index) => {
+                const inputVal = row.querySelector('.nat-input').value;
+                let mark = inputVal === '' ? 0 : parseFloat(inputVal);
+                let coef = subs[index].coef;
+
+                totalPoints += (mark * coef);
+                totalCoeffs += coef;
+            });
+
+            if (totalCoeffs > 0) {
+                let finalAverage = totalPoints / totalCoeffs;
+                document.getElementById('national-final-avg').innerText = finalAverage.toFixed(2);
+                document.getElementById('national-result-display').style.display = 'block';
+            }
         }
     </script>
 </body>
